@@ -1,17 +1,21 @@
 import { toast } from "react-toastify";
 import { ipValidated } from "./ipValidated";
 
+const parseIpOctets = (ip: string): number[] => ip.split(".").map(octet => parseInt(octet, 10));
+
+const formatNumber = (num: number): string => num.toLocaleString();
+
 export const getIpInfo = (ip: string) => {
     const { isValid } = ipValidated(ip);
-
     if (!isValid && ip) {
         toast.error("Dirección IP inválida");
+        return { isValid };
     }
 
-    const firstOctet = parseInt(ip.split(".")[0], 10);
+    const [oct1, oct2, oct3, oct4] = parseIpOctets(ip);
 
     let ipClass = "";
-    let idRed = ""
+    let idRed = "";
     let ipRed = "";
     let idHost = "";
     let ipBroadcast = "";
@@ -21,71 +25,60 @@ export const getIpInfo = (ip: string) => {
     let numberOfConfigurableIps = "0";
     let numberOfDifferentNetworks = "0";
 
-    if (firstOctet >= 1 && firstOctet <= 126) {
+    if (oct1 >= 1 && oct1 <= 126) {
         ipClass = "A";
-
-        ipRed = `${firstOctet}.0.0.0`;
-
-        ipBroadcast = `${firstOctet}.255.255.255`;
-
-        idHost = `${parseInt(ip.split(".")[3], 10)}`;
-
-        idRed = `${firstOctet}`;
-
-        idHost = `${parseInt(ip.split(".")[1], 10)}.${parseInt(ip.split(".")[2], 10)}.${parseInt(ip.split(".")[3], 10)}`;
-
-        netMask = '255.0.0.0'
+        ipRed = `${oct1}.0.0.0`;
+        ipBroadcast = `${oct1}.255.255.255`;
+        idRed = `${oct1}`;
+        idHost = `${oct2}.${oct3}.${oct4}`;
+        netMask = "255.0.0.0";
         subnetMask = "/8";
-
-        numberOfIps = '16,777,216'; 
-        numberOfConfigurableIps = '16,777,214';
-        numberOfDifferentNetworks = '126'; 
-
-    } else if (firstOctet >= 128 && firstOctet <= 191) {
+        numberOfIps = formatNumber(2 ** 24);
+        numberOfConfigurableIps = formatNumber(2 ** 24 - 2);
+        numberOfDifferentNetworks = formatNumber(126); 
+    } else if (oct1 >= 128 && oct1 <= 191) {
         ipClass = "B";
-
-        ipRed = `${firstOctet}.${parseInt(ip.split(".")[1], 10)}.0.0`;
-
-        ipBroadcast = `${firstOctet}.${parseInt(ip.split(".")[1], 10)}.255.255`;
-
-        idRed = `${firstOctet}.${parseInt(ip.split(".")[1], 10)}`;
-
+        ipRed = `${oct1}.${oct2}.0.0`;
+        ipBroadcast = `${oct1}.${oct2}.255.255`;
+        idRed = `${oct1}.${oct2}`;
+        idHost = `${oct3}.${oct4}`;
         netMask = "255.255.0.0";
         subnetMask = "/16";
-        numberOfIps = '65,536';
+        numberOfIps = formatNumber(2 ** 16);
+        numberOfConfigurableIps = formatNumber(2 ** 16 - 2);
+        numberOfDifferentNetworks = formatNumber(2 ** 14);
 
-        idHost = `${parseInt(ip.split(".")[2], 10)}.${parseInt(ip.split(".")[3], 10)}`;
-
-        numberOfConfigurableIps = '65,534';
-
-        numberOfDifferentNetworks = '16,384';
-
-    } else if (firstOctet >= 192 && firstOctet <= 223) {
+    } else if (oct1 >= 192 && oct1 <= 223) {
         ipClass = "C";
-
-        ipRed = `${firstOctet}.${parseInt(ip.split(".")[1], 10)}.${parseInt(ip.split(".")[2], 10)}.0`;
-
-        ipBroadcast = `${firstOctet}.${parseInt(ip.split(".")[1], 10)}.${parseInt(ip.split(".")[2], 10)}.255`;
-
-        idRed = `${firstOctet}.${parseInt(ip.split(".")[1], 10)}.${parseInt(ip.split(".")[2], 10)}`;
-
-        idHost = `${parseInt(ip.split(".")[3], 10)}`;
-
+        ipRed = `${oct1}.${oct2}.${oct3}.0`;
+        ipBroadcast = `${oct1}.${oct2}.${oct3}.255`;
+        idRed = `${oct1}.${oct2}.${oct3}`;
+        idHost = `${oct4}`;
         netMask = "255.255.255.0";
         subnetMask = "/24";
-        numberOfIps = '256';
+        numberOfIps = formatNumber(2 ** 8);
+        numberOfConfigurableIps = formatNumber(2 ** 8 - 2);
+        numberOfDifferentNetworks = formatNumber(2 ** 21);
 
-        numberOfConfigurableIps = '254';
-
-        numberOfDifferentNetworks = '2,097,152';
-
-    } else if (firstOctet >= 224 && firstOctet <= 239) {
+    } else if (oct1 >= 224 && oct1 <= 239) {
         ipClass = "D";
         idRed = "Multicast";
-    } else if (firstOctet >= 240 && firstOctet <= 255) {
+    } else if (oct1 >= 240 && oct1 <= 255) {
         ipClass = "E";
         idRed = "Experimental";
     }
 
-    return { ipClass, isValid, idRed, ipRed, ipBroadcast, idHost, subnetMask, numberOfIps, numberOfConfigurableIps, numberOfDifferentNetworks, netMask };
+    return {
+        ipClass,
+        isValid,
+        idRed,
+        ipRed,
+        ipBroadcast,
+        idHost,
+        subnetMask,
+        netMask,
+        numberOfIps,
+        numberOfConfigurableIps,
+        numberOfDifferentNetworks,
+    };
 };

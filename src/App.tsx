@@ -7,16 +7,16 @@ import { getIpInfo } from "./utils/getIpInfo";
 function App() {
     const [ip, setIp] = useState("1.1.1.1")
     const [isValid, setIsValid] = useState<boolean>(false);
-    const [ipClass, setIpClass] = useState<string>("");
-    const [idRed, setIdRed] = useState<string>("");
-    const [ipRed, setIpRed] = useState<string>("");
-    const [ipBroadcast, setIpBroadcast] = useState<string>("");
-    const [idHost, setIdHost] = useState<string>("");
-    const [subnetMask, setSubnetMask] = useState<string>("");
-    const [netMask, setNetMask] = useState<string>("");
-    const [numberOfIps, setNumberOfIps] = useState<string>("");
-    const [numberOfConfigurableIps, setNumberOfConfigurableIps] = useState<string>("");
-    const [numberOfDifferentNetworks, setNumberOfDifferentNetworks] = useState<string>("");
+    const [ipClass, setIpClass] = useState<string | undefined>("");
+    const [idRed, setIdRed] = useState<string | undefined>("");
+    const [ipRed, setIpRed] = useState<string | undefined>("");
+    const [ipBroadcast, setIpBroadcast] = useState<string | undefined>("");
+    const [idHost, setIdHost] = useState<string | undefined>("");
+    const [subnetMask, setSubnetMask] = useState<string | undefined>("");
+    const [netMask, setNetMask] = useState<string | undefined>("");
+    const [numberOfIps, setNumberOfIps] = useState<string | undefined>("");
+    const [numberOfConfigurableIps, setNumberOfConfigurableIps] = useState<string | undefined>("");
+    const [numberOfDifferentNetworks, setNumberOfDifferentNetworks] = useState<string | undefined>("");
 
     const selectIp = (ip: string) => {
         const { isValid, ipClass, idRed, ipRed, ipBroadcast, idHost, subnetMask, numberOfIps, numberOfConfigurableIps, numberOfDifferentNetworks, netMask} = getIpInfo(ip);
