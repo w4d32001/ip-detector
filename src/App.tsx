@@ -34,7 +34,7 @@ function App() {
     }
 
     return (
-        <div className="min-h-svh flex flex-col justify-start bg-primary text-black items-center gap-y-8 p-8 font-mono">
+        <div className="min-h-svh flex flex-col justify-start bg-primary text-black items-center gap-y-8 p-4 md:p-8 font-mono">
             <header className=" flex items-center">
                 <div className="flex items-center">
                     <div className="flex items-center">
@@ -51,7 +51,7 @@ function App() {
                     </div>
                 </div>
             </header>
-            <main className="grid  grid-cols-6 w-full gap-8 px-16">
+            <main className="grid  grid-cols-6 w-full gap-8 px-8 md:px-16">
                 <div className="col-span-6 md:col-span-2 bg-secondary shadow-xl rounded flex flex-col p-4 gap-y-4 justify-center">
                     <span className="text-4xl text-gray-100">Clase:</span>
                     <span className="text-5xl md:text-7xl text-center text-purple-600 font-bold font-mono">
