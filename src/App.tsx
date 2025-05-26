@@ -65,7 +65,7 @@ function App() {
                                 Direccion IP:
                             </span>
                             <span className="text-3xl text-white font-bold">
-                                {netMask ? ip + netMask : "N/A"}
+                                {subnetMask ? ip + subnetMask : "N/A"}
                             </span>
                         </div>
                         <div className="flex flex-col items-center gap-y-2">
