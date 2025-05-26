@@ -52,6 +52,8 @@ export const getIpInfo = (ip: string) => {
 
         numberOfIps = '65,536';
 
+        idHost = `${parseInt(ip.split(".")[2], 10)}.${parseInt(ip.split(".")[3], 10)}`;
+
         numberOfConfigurableIps = '65,534';
 
         numberOfDifferentNetworks = '16,384';
