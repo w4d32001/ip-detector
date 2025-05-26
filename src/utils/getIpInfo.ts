@@ -16,6 +16,7 @@ export const getIpInfo = (ip: string) => {
     let idHost = "";
     let ipBroadcast = "";
     let subnetMask = "";
+    let netMask = "";
     let numberOfIps = "0";
     let numberOfConfigurableIps = "0";
     let numberOfDifferentNetworks = "0";
@@ -33,7 +34,8 @@ export const getIpInfo = (ip: string) => {
 
         idHost = `${parseInt(ip.split(".")[1], 10)}.${parseInt(ip.split(".")[2], 10)}.${parseInt(ip.split(".")[3], 10)}`;
 
-        subnetMask = "255.0.0.0";
+        netMask = '255.0.0.0'
+        subnetMask = "/8";
 
         numberOfIps = '16,777,216'; 
         numberOfConfigurableIps = '16,777,214';
@@ -48,8 +50,8 @@ export const getIpInfo = (ip: string) => {
 
         idRed = `${firstOctet}.${parseInt(ip.split(".")[1], 10)}`;
 
-        subnetMask = "255.255.0.0";
-
+        netMask = "255.255.0.0";
+        subnetMask = "/16";
         numberOfIps = '65,536';
 
         idHost = `${parseInt(ip.split(".")[2], 10)}.${parseInt(ip.split(".")[3], 10)}`;
@@ -69,8 +71,8 @@ export const getIpInfo = (ip: string) => {
 
         idHost = `${parseInt(ip.split(".")[3], 10)}`;
 
-        subnetMask = "255.0.0.0";
-
+        netMask = "255.255.255.0";
+        subnetMask = "/24";
         numberOfIps = '256';
 
         numberOfConfigurableIps = '254';
@@ -85,5 +87,5 @@ export const getIpInfo = (ip: string) => {
         idRed = "Experimental";
     }
 
-    return { ipClass, isValid, idRed, ipRed, ipBroadcast, idHost, subnetMask, numberOfIps, numberOfConfigurableIps, numberOfDifferentNetworks };
+    return { ipClass, isValid, idRed, ipRed, ipBroadcast, idHost, subnetMask, numberOfIps, numberOfConfigurableIps, numberOfDifferentNetworks, netMask };
 };

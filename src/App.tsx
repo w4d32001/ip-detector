@@ -12,12 +12,13 @@ function App() {
     const [ipBroadcast, setIpBroadcast] = useState<string>("");
     const [idHost, setIdHost] = useState<string>("");
     const [subnetMask, setSubnetMask] = useState<string>("");
+    const [netMask, setNetMask] = useState<string>("");
     const [numberOfIps, setNumberOfIps] = useState<string>("");
     const [numberOfConfigurableIps, setNumberOfConfigurableIps] = useState<string>("");
     const [numberOfDifferentNetworks, setNumberOfDifferentNetworks] = useState<string>("");
 
     const selectIp = (ip: string) => {
-        const {isValid, ipClass, idRed, ipRed, ipBroadcast, idHost, subnetMask, numberOfIps, numberOfConfigurableIps, numberOfDifferentNetworks} = getIpInfo(ip);
+        const {isValid, ipClass, idRed, ipRed, ipBroadcast, idHost, subnetMask, numberOfIps, numberOfConfigurableIps, numberOfDifferentNetworks, netMask} = getIpInfo(ip);
         console.log(isValid)
         console.log(ipClass)
         setIpClass(ipClass);
@@ -29,6 +30,7 @@ function App() {
         setNumberOfIps(numberOfIps);
         setNumberOfConfigurableIps(numberOfConfigurableIps);
         setNumberOfDifferentNetworks(numberOfDifferentNetworks);
+        setNetMask(netMask);
     }
 
     return (
@@ -63,7 +65,7 @@ function App() {
                                 Direccion IP:
                             </span>
                             <span className="text-3xl text-white font-bold">
-                                {ip}
+                                {netMask ? ip + netMask : "N/A"}
                             </span>
                         </div>
                         <div className="flex flex-col items-center gap-y-2">
@@ -94,7 +96,7 @@ function App() {
                         </div>
                     </div>
                 </div>
-                <Card title="Mascara de subred" value={subnetMask ? subnetMask : "N/A"} />
+                <Card title="Mascara de subred" value={netMask ? netMask : "N/A"} />
                 <Card title="Direccion de Broadcast" value={ipBroadcast ? ipBroadcast : "N/A"} />
                 <Card title="Ip de host" value={ip} />
                 <Card title="Nro de ips" value={numberOfIps ? numberOfIps : "N/A"} />
