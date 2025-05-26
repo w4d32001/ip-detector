@@ -96,7 +96,7 @@ function App() {
                         </div>
                     </div>
                 </div>
-                <Card title="Mascara de subred" value={netMask ? netMask : "N/A"} />
+                <Card title="Mascara de red" value={netMask ? netMask : "N/A"} />
                 <Card title="Direccion de Broadcast" value={ipBroadcast ? ipBroadcast : "N/A"} />
                 <Card title="Ip de host" value={ip} />
                 <Card title="Nro de ips" value={numberOfIps ? numberOfIps : "N/A"} />
