@@ -51,34 +51,34 @@ function App() {
                     </div>
                 </div>
             </header>
-            <main className="grid grid-cols-6 w-full gap-8 px-16">
-                <div className="col-span-2 bg-secondary shadow-xl rounded flex flex-col p-4 gap-y-4 justify-center">
-                    <span className="text-5xl text-gray-100">Clase:</span>
-                    <span className="text-7xl text-center text-purple-600 font-bold font-mono">
+            <main className="grid  grid-cols-6 w-full gap-8 px-16">
+                <div className="col-span-6 md:col-span-2 bg-secondary shadow-xl rounded flex flex-col p-4 gap-y-4 justify-center">
+                    <span className="text-4xl text-gray-100">Clase:</span>
+                    <span className="text-5xl md:text-7xl text-center text-purple-600 font-bold font-mono">
                         {ipClass ? ipClass : "N/A"}
                     </span>
                 </div>
-                <div className="col-span-4 bg-secondary shadow-xl rounded flex flex-col justify-between p-4">
-                    <div className="flex gap-y-4 p-4 items-center justify-around gap-x-4 border-b border-gray-300">
-                        <div className="flex flex-col items-center gap-y-2">
-                            <span className="text-2xl text-gray-300">
+                <div className="col-span-6 md:col-span-4 bg-secondary shadow-xl rounded flex flex-col justify-between p-4">
+                    <div className="flex p-4 items-center flex-col lg:flex-row justify-around gap-4 border-b border-gray-300">
+                        <div className="flex lg:w-1/2 items-center flex-col gap-y-2">
+                            <span className="text-xl md:text-2xl text-start text-gray-300">
                                 Direccion IP:
                             </span>
-                            <span className="text-3xl text-white font-bold">
+                            <span className="text-2xl md:text-3xl text-white font-bold">
                                 {subnetMask ? ip + subnetMask : "N/A"}
                             </span>
                         </div>
-                        <div className="flex flex-col items-center gap-y-2">
-                            <span className="text-2xl text-gray-300">
+                        <div className="flex lg:w-1/2 items-center  flex-col gap-y-2">
+                            <span className="text-xl md:text-2xl text-gray-300">
                                 Ip de red:
                             </span>
-                            <span className="text-3xl text-white font-bold">
+                            <span className="text-2xl md:text-3xl text-white font-bold">
                                 {ipRed ? ipRed : "N/A"}
                             </span>
                         </div>
                     </div>
-                    <div className="flex items-center justify-around mt-4">
-                        <div>
+                    <div className="flex flex-col md:flex-row items-center justify-around mt-4">
+                        <div className="flex flex-col md:flex-row items-center gap-y-2">
                             <span className="text-gray-300 text-xl">
                                 Id de Red:{" "}
                             </span>
@@ -86,7 +86,7 @@ function App() {
                                 {idRed ? idRed : "N/A"}
                             </span>
                         </div>
-                        <div>
+                        <div className="flex flex-col md:flex-row items-center gap-y-2">
                             <span className="text-gray-300 text-xl">
                                 Id de Host:{" "}
                             </span>
