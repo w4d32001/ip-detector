@@ -5,7 +5,7 @@ import { ToastContainer } from "react-toastify";
 import { getIpInfo } from "./utils/getIpInfo";
 
 function App() {
-    const [ip, setIp] = useState("1.1.1.1")
+    const [ip, setIp] = useState("")
     const [isValid, setIsValid] = useState<boolean>(false);
     const [ipClass, setIpClass] = useState<string | undefined>("");
     const [idRed, setIdRed] = useState<string | undefined>("");
@@ -41,7 +41,7 @@ function App() {
                         <input
                             type="text"
                             className="bg-white rounded-l py-2 px-4 outline-none text-black font-mono"
-                            placeholder="1.1.1.1"
+                            placeholder="0.0.0.0"
                             value={ip}
                             onChange={(e) => setIp(e.target.value)}
                         />
