@@ -6,6 +6,7 @@ import { getIpInfo } from "./utils/getIpInfo";
 
 function App() {
     const [ip, setIp] = useState("1.1.1.1")
+    const [isValid, setIsValid] = useState<boolean>(false);
     const [ipClass, setIpClass] = useState<string>("");
     const [idRed, setIdRed] = useState<string>("");
     const [ipRed, setIpRed] = useState<string>("");
@@ -18,9 +19,7 @@ function App() {
     const [numberOfDifferentNetworks, setNumberOfDifferentNetworks] = useState<string>("");
 
     const selectIp = (ip: string) => {
-        const {isValid, ipClass, idRed, ipRed, ipBroadcast, idHost, subnetMask, numberOfIps, numberOfConfigurableIps, numberOfDifferentNetworks, netMask} = getIpInfo(ip);
-        console.log(isValid)
-        console.log(ipClass)
+        const { isValid, ipClass, idRed, ipRed, ipBroadcast, idHost, subnetMask, numberOfIps, numberOfConfigurableIps, numberOfDifferentNetworks, netMask} = getIpInfo(ip);
         setIpClass(ipClass);
         setIdRed(idRed);
         setIpRed(ipRed);
@@ -31,6 +30,7 @@ function App() {
         setNumberOfConfigurableIps(numberOfConfigurableIps);
         setNumberOfDifferentNetworks(numberOfDifferentNetworks);
         setNetMask(netMask);
+        setIsValid(isValid);
     }
 
     return (
@@ -55,7 +55,7 @@ function App() {
                 <div className="col-span-6 md:col-span-2 bg-secondary shadow-xl rounded flex flex-col p-4 gap-y-4 justify-center">
                     <span className="text-4xl text-gray-100">Clase:</span>
                     <span className="text-5xl md:text-7xl text-center text-purple-600 font-bold font-mono">
-                        {ipClass ? ipClass : "N/A"}
+                        {ipClass && isValid ? ipClass : "N/A"}
                     </span>
                 </div>
                 <div className="col-span-6 md:col-span-4 bg-secondary shadow-xl rounded flex flex-col justify-between p-4">
@@ -65,7 +65,7 @@ function App() {
                                 Direccion IP:
                             </span>
                             <span className="text-2xl md:text-3xl text-white font-bold">
-                                {subnetMask ? ip + subnetMask : "N/A"}
+                                {subnetMask && isValid ? ip + subnetMask : "N/A"}
                             </span>
                         </div>
                         <div className="flex lg:w-1/2 items-center  flex-col gap-y-2">
@@ -73,7 +73,7 @@ function App() {
                                 Ip de red:
                             </span>
                             <span className="text-2xl md:text-3xl text-white font-bold">
-                                {ipRed ? ipRed : "N/A"}
+                                {ipRed && isValid ? ipRed : "N/A"}
                             </span>
                         </div>
                     </div>
@@ -83,7 +83,7 @@ function App() {
                                 Id de Red:{" "}
                             </span>
                             <span className="text-3xl text-white font-bold">
-                                {idRed ? idRed : "N/A"}
+                                {idRed && isValid ? idRed : "N/A"}
                             </span>
                         </div>
                         <div className="flex flex-col md:flex-row items-center gap-y-2">
@@ -91,17 +91,17 @@ function App() {
                                 Id de Host:{" "}
                             </span>
                             <span className="text-3xl text-white font-bold">
-                                { idHost ? idHost : "N/A"}
+                                { idHost && isValid ? idHost : "N/A"}
                             </span>
                         </div>
                     </div>
                 </div>
-                <Card title="Mascara de red" value={netMask ? netMask : "N/A"} />
-                <Card title="Direccion de Broadcast" value={ipBroadcast ? ipBroadcast : "N/A"} />
-                <Card title="Ip de host" value={ip} />
-                <Card title="Nro de ips" value={numberOfIps ? numberOfIps : "N/A"} />
-                <Card title="Nro de ips configurables" value={numberOfConfigurableIps ? numberOfConfigurableIps : "N/A"} />
-                <Card title="Nro de redes distintas" value={numberOfDifferentNetworks ? numberOfDifferentNetworks : "N/A"} />
+                <Card title="Mascara de red" value={netMask && isValid ? netMask : "N/A"} />
+                <Card title="Direccion de Broadcast" value={ipBroadcast && isValid ? ipBroadcast : "N/A"} />
+                <Card title="Ip de host" value={ip && isValid ? ip : "N/A"} />
+                <Card title="Nro de ips" value={numberOfIps && isValid ? numberOfIps : "N/A"} />
+                <Card title="Nro de ips configurables" value={numberOfConfigurableIps && isValid ? numberOfConfigurableIps : "N/A"} />
+                <Card title="Nro de redes distintas" value={numberOfDifferentNetworks && isValid ? numberOfDifferentNetworks : "N/A"} />
             </main>
             <ToastContainer />
         </div>
